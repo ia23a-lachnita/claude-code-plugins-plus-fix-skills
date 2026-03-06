@@ -122,27 +122,19 @@ test.describe('Install CTA Tests', () => {
     });
   });
 
-  test('should verify CTA buttons exist and are clickable', async ({ page }) => {
+  test('should verify CTA links exist and are clickable', async ({ page }) => {
     // Navigate to homepage
     await page.goto('/');
 
-    // Find primary CTA (Browse Skills Directory)
-    const primaryCTA = page.locator('.btn-primary').first();
-    await expect(primaryCTA).toBeVisible();
+    // Find cowork CTA button (primary CTA in new dark theme)
+    const coworkCTA = page.locator('.cowork-home-button, a[href="/cowork"]').first();
+    await expect(coworkCTA).toBeVisible();
 
-    // Verify button is clickable (not overlapped)
-    await expect(primaryCTA).toBeEnabled();
-
-    // Find secondary CTA (Learning Hub)
-    const secondaryCTA = page.locator('.btn-secondary').first();
-    await expect(secondaryCTA).toBeVisible();
-    await expect(secondaryCTA).toBeEnabled();
-
-    // Click primary CTA to verify navigation works
-    await primaryCTA.click();
+    // Verify button is clickable
+    await coworkCTA.click();
 
     // Verify navigation occurred
-    await expect(page).toHaveURL(/\/skills\/|\/explore/);
+    await expect(page).toHaveURL(/\/cowork/);
 
     // Take screenshot
     await page.screenshot({
