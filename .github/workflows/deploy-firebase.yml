@@ -85,12 +85,14 @@ jobs:
             --non-interactive
 
       - name: Deploy Cloud Functions
+        continue-on-error: true
         run: |
           npx firebase-tools deploy --only functions \
             --project claude-code-plugins-io \
             --non-interactive
 
       - name: Deploy Firestore Rules
+        continue-on-error: true
         run: |
           npx firebase-tools deploy --only firestore:rules \
             --project claude-code-plugins-io \
