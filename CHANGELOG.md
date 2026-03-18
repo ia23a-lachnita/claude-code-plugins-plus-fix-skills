@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.19.0] - 2026-03-17
+
+### Added
+- **box-cloud-filesystem plugin** - Box cloud storage integration with file operations (#368)
+- **geepers plugin** - Added to catalog (#367)
+- **lumera-agent-memory plugin** - MCP server for persistent agent memory (#367)
+
+### Fixed
+- **Content quality audit sweep** - Comprehensive remediation of stub files and boilerplate:
+  - Final 3 audit findings resolved (2 stubs + 1 false positive) (#365)
+  - Wondelai implementation.md stubs filled with methodology guides (#363)
+  - Remaining reference stubs for lokalise, documenso, speak (#364)
+  - SaaS packs prose expanded to meet body-substance threshold (#362)
+  - 12 misc reference stubs across community/crypto/productivity (#361)
+  - 22 devops/saas reference stubs filled (#360)
+  - 13 API development reference stubs with real examples (#359)
+  - OpenRouter pack: 30 skills replaced boilerplate with unique content (#358)
+  - 7 AI/ML reference stubs with real code examples (#357)
+  - 24 performance skills: replaced generic boilerplate openings (#356)
+  - 21 AI/ML skills: replaced generic boilerplate openings (#355)
+  - 4 empty shell skill-enhancers built out with real content (#354)
+  - 13 security/packages skills: replaced generic boilerplate (#353)
+  - Audit content quality false positives addressed (#352)
+
+### Metrics
+- Commits since v4.18.0: 46
+- Files changed: 376 (+37,973 / -2,436 lines)
+- Contributors: Jeremy Longshore, intentsolutions.io, Ahmed Khaled Mohamed
+
+---
+
 ## [4.18.0] - 2026-03-16
 
 ### Added
