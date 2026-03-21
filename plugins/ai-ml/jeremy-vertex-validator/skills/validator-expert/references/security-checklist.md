@@ -1,17 +1,62 @@
 # Security Validation Checklist (30% Weight)
 
-Source: [Vertex AI Security Best Practices](https://cloud.google.com/vertex-ai/docs/security)
+Sources:
+- [Vertex AI Security Best Practices](https://cloud.google.com/vertex-ai/docs/security)
+- [Agent Identity for Agent Engine](https://cloud.google.com/agent-builder/agent-engine/agent-identity)
+- [Managing Access for Deployed Agents](https://cloud.google.com/agent-builder/agent-engine/manage/access)
+- [IAM Roles for Vertex AI](https://cloud.google.com/iam/docs/roles-permissions/aiplatform)
 
 ---
 
-## IAM & Access Control
+## Agent Identity (Recommended — 2025+)
+
+Agent Identity is a first-class IAM principal tied to agent lifecycle. Replaces service-account-only model for new deployments.
+
+**Check for:**
+- Agent Identity enabled (preferred over service accounts for new deployments)
+- Certificate-bound tokens with Context-Aware Access (CAA) + mTLS enforced
+- Credentials are un-replayable outside their Cloud Run container
+- Agent identity auto-destroyed when agent is deleted
+
+**Recommended roles for Agent Identity:**
+
+| Role | Purpose |
+|------|---------|
+| `roles/aiplatform.expressUser` | Inference, sessions, memory access |
+| `roles/serviceusage.serviceUsageConsumer` | Quota and SDK usage |
+| `roles/browser` | Basic Cloud functionalities |
+
+**Anti-patterns:**
+- Using `roles/aiplatform.admin` on agent identity (too broad)
+- Using `roles/aiplatform.user` when `expressUser` suffices
+- Opting out of CAA/mTLS verification
+
+Source: [Agent Identity](https://cloud.google.com/agent-builder/agent-engine/agent-identity)
+
+---
+
+## IAM & Access Control (Service Account Pattern)
+
+For legacy or cross-project deployments using service accounts:
 
 - Service accounts follow least privilege principle
-- No overly permissive roles (Owner, Editor)
-- Workload Identity configured for multi-cloud
-- API keys rotated regularly (max 90 days)
+- No overly permissive roles (`roles/owner`, `roles/editor`, `roles/aiplatform.admin`)
+- Workload Identity Federation configured (no static keys)
 - No hardcoded credentials in code or env vars
-- Service account key rotation policy enforced
+- Default agent SA: `service-PROJECT_NUMBER@gcp-sa-aiplatform-re.iam.gserviceaccount.com`
+- Default role: `roles/aiplatform.reasoningEngineServiceAgent`
+- Cross-project: `roles/iam.serviceAccountTokenCreator` granted to Vertex AI Service Agent
+
+**Least privilege custom role permissions (prediction-only agent):**
+```
+aiplatform.endpoints.predict
+aiplatform.sessions.create
+aiplatform.sessions.get
+aiplatform.sessions.update
+aiplatform.memories.retrieve
+aiplatform.memories.generate
+serviceusage.quotas.get
+```
 
 ### Validation Commands
 
@@ -25,8 +70,47 @@ gcloud projects get-iam-policy PROJECT_ID \
 # Check for overly permissive roles
 gcloud projects get-iam-policy PROJECT_ID \
   --flatten="bindings[].members" \
-  --filter="bindings.role:(roles/owner OR roles/editor)"
+  --filter="bindings.role:(roles/owner OR roles/editor OR roles/aiplatform.admin)"
+
+# Check agent identity status
+gcloud ai agent-engines describe AGENT_ID \
+  --location=REGION --format="yaml(agentIdentity)"
 ```
+
+Source: [Custom Service Accounts](https://cloud.google.com/vertex-ai/docs/general/custom-service-account)
+
+---
+
+## Memory Bank IAM Conditions
+
+For multi-tenant agents, use IAM Conditions to scope memory access per user/group:
+
+- IAM Conditions with `aiplatform.googleapis.com/memoryScope` attribute
+- Restrict memory operations to specific user/group scopes
+- Limitation: `ListMemories` and `PurgeMemories` need unconditional grants
+
+```yaml
+# Example IAM Condition
+expression: 'api.getAttribute("aiplatform.googleapis.com/memoryScope", "").startsWith("user-")'
+title: "User-scoped memory access"
+```
+
+Source: [Memory Bank IAM Conditions](https://cloud.google.com/agent-builder/agent-engine/memory-bank/iam-conditions)
+
+---
+
+## Model Armor
+
+- Model Armor enabled for all ADK-based agents
+- Agent needs `roles/modelarmor.user` for sanitize APIs
+- Templates managed via `roles/modelarmor.admin`
+- Org-level floor settings via `roles/modelarmor.floorSettingsAdmin`
+
+**Agent permissions needed:**
+- `modelarmor.templates.useToSanitizeUserPrompt`
+- `modelarmor.templates.useToSanitizeModelResponse`
+
+Source: [Model Armor](https://cloud.google.com/vertex-ai/docs/generative-ai/model-armor) · [Model Armor IAM](https://cloud.google.com/iam/docs/roles-permissions/modelarmor)
 
 ---
 
@@ -57,35 +141,31 @@ Source: [VPC Service Controls](https://cloud.google.com/vpc-service-controls/doc
 
 - Encryption at rest with CMEK keys (preferred) or Google-managed
 - Encryption in transit (TLS)
-- Model Armor enabled for ADK-based agents
 - Sensitive data handling complies with policies
+- Secret Manager for API keys (`roles/secretmanager.secretAccessor`)
 
-### Validation
+---
 
-```python
-def validate_security(agent_config):
-    checks = []
-    service_account = agent_config.get('service_account')
-    if has_overly_permissive_roles(service_account):
-        checks.append({
-            "category": "Security", "check": "IAM Least Privilege",
-            "status": "FAIL",
-            "message": f"Service account {service_account} has Owner role"
-        })
-    if not agent_config.get('encryption_config', {}).get('cmek_key'):
-        checks.append({
-            "category": "Security", "check": "Encryption at Rest",
-            "status": "WARNING",
-            "message": "No CMEK key configured, using Google-managed keys"
-        })
-    if agent_config.get('agent_framework') == 'google-adk':
-        if not agent_config.get('model_armor_enabled'):
-            checks.append({
-                "category": "Security", "check": "Model Armor",
-                "status": "FAIL",
-                "message": "Model Armor not enabled for ADK agent"
-            })
-    return checks
-```
+## Discovery Engine IAM (If Agents Use Search)
 
-Source: [Model Armor Documentation](https://cloud.google.com/vertex-ai/docs/generative-ai/model-armor)
+| Role | Access |
+|------|--------|
+| `roles/discoveryengine.admin` | Full access |
+| `roles/discoveryengine.editor` | Create/update datastores, chat engines |
+| `roles/discoveryengine.viewer` | Read-only |
+
+Source: [Discovery Engine IAM](https://cloud.google.com/iam/docs/roles-permissions/discoveryengine)
+
+---
+
+## Identity Model Comparison
+
+| Aspect | Agent Identity (2025+) | Custom Service Account | Default SA (Legacy) |
+|--------|----------------------|------------------------|-------------------|
+| Isolation | Per-agent | Shared | Shared |
+| Lifecycle | Auto-cleanup | Manual | Manual |
+| Security | CAA + mTLS | Manual mTLS | No mTLS |
+| Credential theft | Un-replayable | Can be misused | Can be misused |
+| Recommended | **Yes** | If legacy required | **No** |
+
+Source: [Agent Engine Access Management](https://cloud.google.com/agent-builder/agent-engine/manage/access)

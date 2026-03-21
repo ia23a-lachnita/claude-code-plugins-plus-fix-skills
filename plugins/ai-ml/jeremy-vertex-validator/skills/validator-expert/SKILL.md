@@ -37,13 +37,14 @@ Validate production readiness of Vertex AI Agent Engine deployments by executing
 ## Instructions
 
 1. Retrieve the deployment configuration using `gcloud ai agents describe` and parse model, scaling, and feature settings
-2. Run the security validation suite:
-   - Verify IAM roles follow least-privilege by auditing service account bindings against required permissions
+2. Run the security validation suite (see [security checklist](references/security-checklist.md)):
+   - Check if Agent Identity is enabled (recommended over service accounts for 2025+ deployments)
+   - If using service accounts, verify IAM roles follow least-privilege (`roles/aiplatform.expressUser`, not `roles/aiplatform.admin`)
    - Confirm VPC Service Controls perimeter is active and correctly scoped
    - Check encryption at rest (CMEK or Google-managed) and in-transit (TLS 1.3)
    - Scan configuration files and environment variables for hardcoded secrets
-   - Validate service account key rotation policy (max 90 days)
-   - Confirm Model Armor is enabled for ADK-based agents
+   - Validate Model Armor is enabled with `roles/modelarmor.user` granted
+   - Check Memory Bank IAM Conditions for multi-tenant agents
 3. Run the monitoring validation suite:
    - Verify Cloud Monitoring dashboards exist with required panels (request count, error rate, latency)
    - Confirm alerting policies cover error rate spikes, latency SLO breaches, and cost thresholds
