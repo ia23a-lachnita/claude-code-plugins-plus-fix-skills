@@ -1,5 +1,7 @@
 # ARD: Genkit Production Expert
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The Genkit Production Expert operates within a developer's project to create, configure, and deploy Firebase Genkit flows. It interacts with the local codebase for implementation and Google Cloud services for model access and deployment.
@@ -34,6 +36,8 @@ Deployed Genkit Flow
 | OpenTelemetry native | Built-in Genkit tracing over custom logging | Standard observability protocol; integrates with Cloud Monitoring without custom code |
 | Firebase Functions for simple flows | Functions over Cloud Run for single-purpose flows | Zero infrastructure management, automatic scaling, sub-second deployment |
 | Cloud Run for long flows | Cloud Run when execution exceeds 60s Functions limit | Configurable timeout up to 60 minutes; supports streaming responses |
+| Error categorization | Distinct handling for SAFETY_BLOCK, QUOTA_EXCEEDED, schema errors | Each error type needs different recovery: retry, fallback, or user notification |
+| Context caching for RAG | Cache embedding results for repeated document queries | Reduces token costs and latency for frequently accessed knowledge bases |
 
 ## Tool Usage Pattern
 
@@ -63,3 +67,5 @@ Deployed Genkit Flow
 - Context caching: add prompt caching for repeated queries to reduce token costs
 - Streaming responses: enable SSE streaming for chat-style flows on Cloud Run
 - Multi-flow orchestration: chain multiple flows using Genkit's flow-to-flow calling pattern
+- Custom retrievers: extend beyond Firestore vector search to Pinecone, Weaviate, or Elasticsearch
+- Cost dashboards: generate Cloud Monitoring dashboards specific to token usage and model cost per flow

@@ -1,5 +1,7 @@
 # ARD: ADK Agent Builder
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The ADK Agent Builder operates within the Google Cloud AI ecosystem. It generates project scaffolds that target the `google-adk` SDK and optionally deploy to Vertex AI Agent Engine.

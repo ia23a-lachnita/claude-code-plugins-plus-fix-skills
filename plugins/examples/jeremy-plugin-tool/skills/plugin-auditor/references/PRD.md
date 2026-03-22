@@ -3,6 +3,8 @@
 **Version:** 1.0.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -43,6 +45,10 @@ Claude Code plugins can introduce security vulnerabilities (hardcoded secrets, c
 - Audit is read-only: never modify the plugin being audited
 - Pattern matching must avoid false positives on common test fixtures and documentation examples
 - Report format must be consistent across all plugins for comparability
+- Each failed check must include a specific, runnable fix command
+- Audit must complete within 30 seconds for any single plugin
+- Scoring must be deterministic: same plugin state always produces the same scores
+- Report must clearly distinguish critical failures from advisory warnings
 
 ## Dependencies
 
@@ -56,3 +62,5 @@ Claude Code plugins can introduce security vulnerabilities (hardcoded secrets, c
 - Runtime security testing (executing plugin code in a sandbox)
 - Performance benchmarking of MCP server plugins
 - Auditing external dependencies for known vulnerabilities (use dedicated tools like `npm audit`)
+- Code quality analysis beyond security patterns (logic bugs, performance issues)
+- Cross-plugin dependency conflict detection

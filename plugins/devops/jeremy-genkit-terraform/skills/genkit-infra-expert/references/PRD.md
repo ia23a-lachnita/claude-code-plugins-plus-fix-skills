@@ -3,6 +3,8 @@
 **Version:** 1.0.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -25,6 +27,8 @@ Deploying Firebase Genkit applications to production requires choosing between F
 2. All API keys and secrets stored in Secret Manager with proper IAM bindings
 3. Auto-scaling configured: min instances > 0 for production, max instances capped for cost control
 4. Monitoring dashboards track token usage, latency, error rate, and cost per flow
+5. Cloud Run services include readiness probes for health checking
+6. Functions deployments specify appropriate memory and timeout limits for the flow
 
 ## Functional Requirements
 
@@ -43,6 +47,8 @@ Deploying Firebase Genkit applications to production requires choosing between F
 - Secrets must never appear in Terraform state or plan output (use `sensitive = true`)
 - Cloud Run services must have a readiness probe configured for health checking
 - Functions deployments must specify memory and timeout limits appropriate for the flow
+- All modules must be idempotent and safe to re-apply
+- Variable descriptions must document valid deployment targets and their trade-offs
 
 ## Dependencies
 
@@ -59,3 +65,4 @@ Deploying Firebase Genkit applications to production requires choosing between F
 - Frontend hosting configuration
 - Custom domain and SSL certificate management
 - GKE cluster creation (assumes existing cluster for GKE target)
+- Database provisioning (Firestore, Cloud SQL) for flow state storage

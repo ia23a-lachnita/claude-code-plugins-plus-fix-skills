@@ -191,3 +191,6 @@ gcloud billing budgets create \
 gemini-2.0-flash: ~$0.00028/query  ($500 budget = ~1.78M queries/month)
 gemini-2.5-pro:   ~$0.00600/query  ($500 budget = ~83K queries/month)
 ```
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

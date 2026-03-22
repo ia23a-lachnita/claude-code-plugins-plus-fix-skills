@@ -45,3 +45,6 @@
 | `SequentialAgent: step 2 failed` | Upstream agent produced unexpected output | Add output validation between pipeline stages |
 | `ParallelAgent: timeout on subtask` | One parallel agent hung | Set per-agent `timeout` parameter |
 | `Orchestrator received empty response` | Sub-agent returned nothing | Add fallback response in sub-agent's system prompt |
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

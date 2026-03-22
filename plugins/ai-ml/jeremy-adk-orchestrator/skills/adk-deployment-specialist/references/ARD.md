@@ -1,5 +1,7 @@
 # ARD: ADK Deployment Specialist
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The ADK Deployment Specialist bridges local ADK agent development and production Agent Engine hosting. It interacts with the local codebase for implementation, the ADK SDK for agent construction, and Google Cloud for deployment and validation.
@@ -34,6 +36,8 @@ Vertex AI Agent Engine
 | Local-first testing | Run all tests locally before any cloud deployment | Catches issues early; avoids costly failed deployments |
 | Sandbox defaults | TTL 7-14 days, SECURE_ISOLATED type | Balances state retention with security; matches Google's recommended production config |
 | Sequential orchestration as starting point | Default to SequentialAgent for multi-agent flows | Predictable debugging path; upgrade to Parallel/Loop when performance requires it |
+| Requirements isolation | Production deps only in deployed package | Test and dev deps increase package size and cold start time without benefit |
+| Smoke tests for validation | Automated endpoint verification post-deploy | Catches deployment issues immediately rather than waiting for user traffic |
 
 ## Tool Usage Pattern
 
@@ -60,6 +64,8 @@ Vertex AI Agent Engine
 
 - Custom orchestration patterns: replace Sequential with Parallel or Loop agents by changing the pipeline definition
 - Additional A2A endpoints: extend the agent card with custom capabilities and task types
-- CI/CD integration: wrap deployment commands in GitHub Actions with WIF authentication
+- CI/CD integration: wrap deployment commands in GitHub Actions with WIF authentication (see gh-actions-validator)
 - Blue-green deployment: deploy new version alongside existing, validate, then switch traffic
 - Multi-region deployment: extend deploy scripts to target multiple regions with traffic splitting
+- Automated rollback: add rollback scripts that revert to previous agent version on validation failure
+- Custom health checks: extend post-deploy validation with application-specific probes beyond A2A endpoints

@@ -3,6 +3,8 @@
 **Version:** 1.0.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -25,6 +27,8 @@ GitHub Actions workflows that deploy to Google Cloud commonly use long-lived ser
 2. Validate OIDC `id-token: write` permission is present in all deployment workflows
 3. Confirm no `roles/owner` or `roles/editor` IAM bindings in deployment service accounts
 4. Provide complete WIF setup commands that work on first execution
+5. Hardened workflow template includes secret scanning and dependency vulnerability checks
+6. Post-deployment health checks validate endpoint availability before marking success
 
 ## Functional Requirements
 
@@ -40,9 +44,11 @@ GitHub Actions workflows that deploy to Google Cloud commonly use long-lived ser
 ## Non-Functional Requirements
 
 - Validation must work on any GitHub Actions YAML regardless of deployment target (Cloud Run, Agent Engine, Functions)
-- WIF setup commands must be idempotent (safe to re-run)
+- WIF setup commands must be idempotent (safe to re-run without side effects)
 - Must handle matrix builds and reusable workflow patterns
 - No modifications to workflows without explicit user consent
+- YAML parsing must handle all GitHub Actions syntax including anchors, aliases, and expressions
+- Validation must complete offline (no GitHub API calls required for YAML analysis)
 
 ## Dependencies
 
@@ -57,3 +63,5 @@ GitHub Actions workflows that deploy to Google Cloud commonly use long-lived ser
 - GitHub Actions runner self-hosting configuration
 - Application-level testing within workflows (unit tests, integration tests)
 - Cost optimization of GitHub Actions minutes
+- GitHub App or OAuth token management
+- Workflow performance optimization (caching, parallelism)

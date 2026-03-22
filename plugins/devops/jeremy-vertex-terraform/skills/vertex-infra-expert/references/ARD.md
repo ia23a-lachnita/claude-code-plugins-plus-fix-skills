@@ -1,5 +1,7 @@
 # ARD: Vertex Infra Expert
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The Vertex Infra Expert generates Terraform modules for provisioning Vertex AI services: endpoints, deployed models, vector search indices, and ML pipelines with production guardrails.
@@ -67,3 +69,5 @@ GCP Vertex AI Infrastructure
 - Feature Store integration: add Terraform for Vertex AI Feature Store for ML feature management
 - Custom monitoring: extend dashboards with model-specific metrics (drift detection, prediction quality)
 - Module composition: combine with adk-infra-expert for Agent Engine + Vertex AI unified deployments
+- Cost estimation: integrate `infracost` for pre-apply cost projections based on endpoint configuration
+- Drift detection: scheduled `terraform plan` to catch manual console changes that deviate from code

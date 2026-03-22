@@ -3,6 +3,8 @@
 **Version:** 2.1.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -25,6 +27,8 @@ Google Cloud's AI ecosystem spans six major frameworks (ADK, Agent Starter Pack,
 2. Generated examples include IAM least-privilege, Secret Manager for credentials, and monitoring instrumentation
 3. Every example includes a deployment configuration for at least one target (Cloud Run, Firebase Functions, or Agent Engine)
 4. Source repository and official documentation links are cited for every pattern used
+5. Generated code uses currently available Gemini models (2.5 Flash/Pro), not deprecated versions
+6. Environment variable template provided listing all required secrets and API keys
 
 ## Functional Requirements
 
@@ -61,3 +65,4 @@ Google Cloud's AI ecosystem spans six major frameworks (ADK, Agent Starter Pack,
 - Custom model training or fine-tuning workflows
 - Frontend or UI development for AI applications
 - Ongoing maintenance or version updates of generated examples
+- Proprietary or non-open-source GCP patterns

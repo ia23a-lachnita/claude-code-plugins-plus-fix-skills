@@ -1,5 +1,7 @@
 # ARD: Plugin Validator
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The Plugin Validator runs the same structural and compliance checks as the CI pipeline, but locally and with actionable fix output. It operates read-only within the monorepo.
@@ -34,6 +36,8 @@ Validation Report
 | Sequential check execution | Run all checks even if early ones fail | Complete picture in one run; developer fixes all issues at once |
 | Read-only operation | Never modify files during validation | Validators should never have side effects; separation of concerns |
 | Local-only execution | No network calls required | Works offline, fast, deterministic |
+| Structured output format | Consistent report structure with pass/fail indicators | Enables CI parsing and human reading from the same output |
+| Allowed-field allowlist | Check plugin.json against explicit field list | Catches extra fields that CI rejects; more reliable than a denylist |
 
 ## Tool Usage Pattern
 
@@ -60,3 +64,5 @@ Validation Report
 - Batch validation: validate all plugins in a category or the entire repository with a single command
 - Severity levels: distinguish critical (blocks publish), warning (should fix), and info (nice to have)
 - Watch mode: re-validate on file changes during plugin development
+- Pre-commit hook: register as a git pre-commit hook that blocks commits with validation failures
+- Diff-mode: validate only files changed in the current git diff for faster iteration

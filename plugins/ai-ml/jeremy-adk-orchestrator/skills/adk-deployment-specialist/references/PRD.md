@@ -3,6 +3,8 @@
 **Version:** 2.1.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -22,8 +24,10 @@ Deploying ADK multi-agent systems to Vertex AI Agent Engine involves coordinatin
 
 1. Deploy an ADK agent to Agent Engine with verified A2A endpoints in under 15 minutes
 2. All A2A protocol endpoints (AgentCard, task send, task status) respond correctly post-deployment
-3. Code Execution Sandbox and Memory Bank are configured with production-safe defaults
-4. Deployment includes observability: structured logging, retry/backoff, and health monitoring
+3. Code Execution Sandbox configured with 7-14 day TTL and SECURE_ISOLATED sandbox type
+4. Memory Bank enabled with minimum 100-memory retention and Firestore encryption
+5. Deployment includes observability: structured logging, retry/backoff, and health monitoring
+6. Agent package excludes test files and dev dependencies (minimized cold start)
 
 ## Functional Requirements
 
@@ -41,6 +45,9 @@ Deploying ADK multi-agent systems to Vertex AI Agent Engine involves coordinatin
 - Agent packages must exclude test files and dev dependencies to minimize cold start time
 - Deployment commands must be idempotent (safe to re-run without side effects)
 - Support for both greenfield deployments and updates to existing Agent Engine instances
+- Local tests must pass before any deployment attempt (fail-fast principle)
+- All generated code must include error handling for transient failures (retries with backoff)
+- Deployment scripts must provide clear rollback instructions if validation fails
 
 ## Dependencies
 
@@ -52,7 +59,9 @@ Deploying ADK multi-agent systems to Vertex AI Agent Engine involves coordinatin
 
 ## Out of Scope
 
-- Infrastructure provisioning (Terraform modules handled by adk-infra-expert)
+- Infrastructure provisioning with Terraform (handled by adk-infra-expert)
 - Post-deployment inspection and scoring (handled by vertex-engine-inspector)
 - CI/CD pipeline creation for GitHub Actions (handled by gh-actions-validator)
 - Cost optimization and model selection strategy
+- Agent application logic design (handled by adk-engineer)
+- Multi-region deployment with traffic splitting

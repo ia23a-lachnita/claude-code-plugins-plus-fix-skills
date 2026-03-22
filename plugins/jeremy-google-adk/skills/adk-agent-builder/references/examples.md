@@ -120,3 +120,6 @@ agent = Agent(
 ```
 
 **Environment**: `export SLACK_WEBHOOK_URL=https://hooks.slack.com/services/...`
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

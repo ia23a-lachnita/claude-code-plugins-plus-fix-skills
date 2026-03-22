@@ -3,6 +3,8 @@
 **Version:** 1.0.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -43,6 +45,9 @@ Creating a new Claude Code plugin requires generating multiple interdependent fi
 - Generated `plugin.json` must contain only allowed fields (no extra fields that CI rejects)
 - All generated `.sh` files must have execute permissions set
 - MCP plugins must include `package.json`, `tsconfig.json`, and build configuration
+- Generated README must follow the repository's standard format with installation and usage sections
+- Default version for new plugins is `1.0.0`
+- Keywords array must contain at least 2 entries for marketplace search discoverability
 
 ## Dependencies
 
@@ -57,3 +62,5 @@ Creating a new Claude Code plugin requires generating multiple interdependent fi
 - Publishing to external registries
 - Generating test files for MCP plugins
 - Migrating existing plugins between categories
+- Generating reference documentation (PRD, ARD, errors.md, etc.)
+- Version bumping after creation (handled by version-bumper)

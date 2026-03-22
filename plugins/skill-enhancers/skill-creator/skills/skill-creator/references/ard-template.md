@@ -7,6 +7,8 @@ Standard Architecture Requirements Document for all marketplace skills. Every AR
 ```markdown
 # ARD: {Skill Name}
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 {Where does this skill fit? What systems/services does it interact with? Include a simple text diagram if helpful.}

@@ -1,5 +1,7 @@
 # ARD: Vertex Engine Inspector
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The Vertex Engine Inspector is a read-only diagnostic skill that queries a live Agent Engine deployment and its surrounding GCP infrastructure to produce a scored readiness report.
@@ -39,6 +41,8 @@ Developer Request ──→ [Vertex Engine Inspector] ──→ YAML Inspection 
 | YAML output format | YAML over JSON or Markdown | Machine-parseable for CI pipelines while remaining human-readable for operators |
 | Weighted scoring | Category weights reflecting production impact | Security and reliability weighted higher than monitoring; matches real incident severity |
 | 24-hour metric window | Query last 24h by default | Balances recency with statistical significance for error rates and latency |
+| Sequential category checks | Run categories one at a time, not parallel | Allows early categories to inform later ones (e.g., runtime config affects security audit) |
+| Prioritized recommendations | Score improvement estimate per item | Helps teams focus remediation effort where it matters most |
 
 ## Tool Usage Pattern
 
@@ -66,3 +70,5 @@ Developer Request ──→ [Vertex Engine Inspector] ──→ YAML Inspection 
 - CI/CD integration: pipe the YAML output into a quality gate that blocks deployment below a threshold score
 - Historical tracking: store inspection reports in GCS or BigQuery to track readiness trends over time
 - Alert integration: feed critical findings directly into PagerDuty or Slack via webhook
+- Multi-agent fleet inspection: iterate over all agents in a project to produce a fleet-wide readiness dashboard
+- Compliance profiles: define inspection profiles for SOC2, HIPAA, or FedRAMP with stricter thresholds per category

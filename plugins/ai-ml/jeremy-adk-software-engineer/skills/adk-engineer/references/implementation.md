@@ -128,3 +128,6 @@ curl -s https://AGENT_ENDPOINT/.well-known/agent-card | jq .name
 # 5. Health check
 python deploy/validate.sh  # Sends test prompt, checks response format
 ```
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

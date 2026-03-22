@@ -74,3 +74,6 @@
 | `Cloud Functions requires Blaze plan` | Functions not available on Spark plan | Upgrade to Blaze plan; set budget alerts to avoid surprises |
 | Unexpected high bill | Unoptimized Firestore reads or runaway function invocations | Set budget alerts: `gcloud billing budgets create`; review usage in Firebase Console > Usage & billing |
 | `Quota exceeded for quota metric 'Generate Content requests'` | Vertex AI free tier or quota limit reached | Request quota increase in IAM & Admin > Quotas; implement client-side rate limiting |
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

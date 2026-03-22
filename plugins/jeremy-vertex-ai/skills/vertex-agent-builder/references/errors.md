@@ -58,3 +58,6 @@
 | `BILLING_DISABLED: This project has billing disabled` | Billing not linked to GCP project | Link billing account: GCP Console > Billing > Link a billing account |
 | Token usage spike after RAG integration | Large retrieved context inflating input tokens | Reduce `top_k` results (3-5 chunks), set `max_output_tokens`, truncate long chunks |
 | Agent Engine idle charges | Deployed agent incurring minimum instance costs | Set `min_replica_count=0` for auto-scale-to-zero, or undeploy unused agents |
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

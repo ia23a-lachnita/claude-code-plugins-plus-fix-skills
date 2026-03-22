@@ -1,5 +1,7 @@
 # ARD: Version Bumper
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The Version Bumper operates within the claude-code-plugins monorepo to synchronize version numbers across the two-catalog system. It reads and writes JSON files and invokes the marketplace sync script.
@@ -29,6 +31,8 @@ marketplace.json (auto-regenerated)
 | Two-file update + sync | Edit source files, let sync-marketplace regenerate | Follows the repo's two-catalog system: extended.json is source of truth, marketplace.json is derived |
 | Post-bump verification | Read all three files and compare versions | Catches sync failures immediately rather than at CI time |
 | Optional git operations | Tag and commit suggested but not forced | Some workflows prefer manual git control; others want full automation |
+| Semver-only format | Strict `x.y.z` parsing, no pre-release suffixes | Matches the marketplace catalog's version format expectations |
+| Plugin name matching | Exact name match in marketplace.extended.json | Prevents accidental updates to similarly-named plugins |
 
 ## Tool Usage Pattern
 
@@ -56,3 +60,5 @@ marketplace.json (auto-regenerated)
 - Changelog integration: auto-generate changelog entries from git log between old and new version tags
 - Pre-release versions: support semver pre-release suffixes (e.g., `1.0.0-beta.1`)
 - CI hook: run as a post-merge action that auto-bumps patch on every merge to main
+- Version history: maintain a version log file tracking all bumps with dates and reasons
+- Dependency bumps: cascade version updates to plugins that depend on the bumped plugin

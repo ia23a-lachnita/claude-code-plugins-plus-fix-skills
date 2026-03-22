@@ -3,6 +3,8 @@
 **Version:** 2.1.0
 **Author:** Jeremy Longshore
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 

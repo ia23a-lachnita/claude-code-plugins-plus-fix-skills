@@ -1,5 +1,7 @@
 # ARD: Plugin Auditor
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The Plugin Auditor is a read-only inspection skill that scans plugin files against eight audit categories and produces a scored quality report. It operates within the monorepo and references the marketplace catalog for compliance checks.
@@ -34,6 +36,8 @@ Audit Report
 | Fix commands in output | Every failure includes a runnable fix | Reduces time-to-fix from "figure out what's wrong" to "run this command" |
 | Numeric scoring | 0-10 per category, composite overall | Enables objective comparison across plugins and over time |
 | Pattern-based security scan | Regex patterns for secrets, injection, obfuscation | Fast, deterministic, no external service dependency |
+| Context-aware filtering | Skip patterns inside code blocks and test directories | Reduces false positives from documentation examples and test fixtures |
+| Tiered rating system | Excellent/Good/Needs Work/Failed based on composite score | Clear actionability: Failed blocks publish, Needs Work requires fixes, Good/Excellent are publishable |
 
 ## Tool Usage Pattern
 
@@ -60,3 +64,5 @@ Audit Report
 - Historical tracking: store audit scores in a database to track quality trends per plugin
 - Comparative reports: audit multiple plugins and rank them by overall score
 - Severity weighting: allow configuring which categories are blocking vs advisory
+- Auto-fix mode: pair with plugin-validator to automatically fix simple issues (permissions, missing fields)
+- Community scoring: aggregate audit scores across all marketplace plugins for public quality badges

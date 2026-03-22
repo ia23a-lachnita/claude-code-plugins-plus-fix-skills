@@ -198,3 +198,6 @@ gcloud logging read 'resource.type="aiplatform.googleapis.com/PublisherModel"' \
 gcloud logging read 'resource.type="aiplatform.googleapis.com/PublisherModel" AND severity>=ERROR' \
   --project=PROJECT_ID --limit=20
 ```
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

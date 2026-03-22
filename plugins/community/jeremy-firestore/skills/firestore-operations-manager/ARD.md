@@ -1,5 +1,7 @@
 # ARD: Firestore Operations Manager Skill
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 This skill operates within the Firestore ecosystem on Google Cloud Platform. The primary components are:

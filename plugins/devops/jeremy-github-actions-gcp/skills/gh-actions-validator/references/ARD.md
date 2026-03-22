@@ -1,5 +1,7 @@
 # ARD: GH Actions Validator
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The GH Actions Validator inspects GitHub Actions workflow files and their associated GCP IAM configuration to ensure secure deployment patterns using Workload Identity Federation.
@@ -34,6 +36,8 @@ Validation Report + WIF Setup
 | Least-privilege IAM audit | Flag owner/editor roles; suggest specific alternatives | Broad roles are the most common security misconfiguration in CI/CD pipelines |
 | YAML-level validation | Parse workflow YAML rather than running workflows | Safe, fast, deterministic; no need for GitHub API tokens or workflow triggers |
 | Idempotent WIF setup | All gcloud commands safe to re-run | Prevents errors when running setup on already-configured projects |
+| Role-to-target mapping | Map deployment targets to minimum IAM roles | Cloud Run needs `roles/run.developer`, Agent Engine needs `roles/aiplatform.user`; prevents over-granting |
+| Auth action version pinning | Require `@v2` not `@v1` or `@main` | Pinned versions are reproducible and auditable; `@main` can introduce breaking changes |
 
 ## Tool Usage Pattern
 
@@ -64,3 +68,5 @@ Validation Report + WIF Setup
 - Reusable workflow validation: audit called workflows and composite actions for the same security patterns
 - Policy-as-code: define organization-level security policies that all workflows must satisfy
 - Automated remediation: apply fixes to workflow files with user confirmation
+- Compliance reports: generate audit reports showing WIF adoption percentage across all workflows
+- Team templates: generate organization-level reusable workflows with pre-configured WIF

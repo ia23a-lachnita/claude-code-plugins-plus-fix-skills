@@ -3,6 +3,8 @@
 **Version:** 1.0.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -41,6 +43,9 @@ Claude Code plugins store version numbers in multiple locations (`plugin.json`, 
 - Bump operation must be idempotent: running twice with the same target version produces no additional changes
 - Must work on any plugin in the repository regardless of category or type
 - JSON formatting must be preserved (no whitespace changes beyond the version field)
+- Version strings must strictly follow semantic versioning (`major.minor.patch`)
+- Sync-marketplace must complete without errors after version update
+- Git operations (tag, commit) are optional and never executed without user acknowledgment
 
 ## Dependencies
 
@@ -55,3 +60,5 @@ Claude Code plugins store version numbers in multiple locations (`plugin.json`, 
 - Publishing to npm or other package registries
 - Updating version references inside SKILL.md frontmatter (those track independently)
 - Multi-plugin batch bumps in a single invocation
+- Pre-release version suffixes (e.g., `1.0.0-beta.1`)
+- Rollback to a previous version

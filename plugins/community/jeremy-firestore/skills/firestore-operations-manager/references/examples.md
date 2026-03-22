@@ -206,3 +206,6 @@ Required composite index in `firestore.indexes.json`:
 ```
 
 `__name__` is automatically included as a tiebreaker -- no explicit index entry needed.
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

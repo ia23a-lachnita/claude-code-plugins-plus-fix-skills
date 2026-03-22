@@ -1,5 +1,7 @@
 # ARD: ADK Infra Expert
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The ADK Infra Expert generates and validates Terraform modules for provisioning Vertex AI Agent Engine infrastructure. It interacts with the local filesystem for Terraform code and GCP APIs for validation.
@@ -67,3 +69,5 @@ GCP Infrastructure
 - Multi-region deployment: duplicate compute modules across regions with traffic management
 - Policy-as-code: integrate with Terraform Sentinel or OPA for org-level policy enforcement
 - Module registry: publish modules to a private Terraform registry for cross-team reuse
+- Cost estimation: integrate `infracost` for pre-apply cost projections
+- Drift detection: add scheduled `terraform plan` to detect configuration drift in production

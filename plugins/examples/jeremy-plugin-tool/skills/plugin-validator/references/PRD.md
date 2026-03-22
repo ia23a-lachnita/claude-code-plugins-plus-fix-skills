@@ -3,6 +3,8 @@
 **Version:** 1.0.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -43,7 +45,10 @@ The CI pipeline for claude-code-plugins runs 10+ validation checks across JSON s
 - Read-only: never modify the validated plugin or catalog files
 - Must run without network access (all checks are local)
 - Compatible with both individual plugin paths and full-repository scans
-- Exit code reflects pass/fail for CI integration
+- Exit code reflects pass/fail for CI integration (0 = pass, 1 = fail)
+- Validation must complete in under 10 seconds for any single plugin
+- Error messages must identify the exact file, field, and expected value
+- Report format must be consistent for automated parsing
 
 ## Dependencies
 
@@ -58,3 +63,5 @@ The CI pipeline for claude-code-plugins runs 10+ validation checks across JSON s
 - Validating MCP plugin runtime behavior (build and test are separate steps)
 - Marketplace search index or route validation (handled by marketplace build pipeline)
 - Cross-plugin dependency checking
+- Quality scoring beyond pass/fail (see plugin-auditor for scored audits)
+- Network-dependent checks (all validation is local)

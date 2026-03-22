@@ -48,3 +48,18 @@
 | Wrong region for deployment | `region` in config doesn't match gcloud default | Explicitly set `region` in AgentConfig; verify with `gcloud config get compute/region` |
 | Model string not recognized | Using full model path instead of short name | Use `gemini-2.5-flash` not `projects/X/locations/Y/publishers/google/models/gemini-2.5-flash` |
 | Environment variable not set | Required API key or project ID missing | Export before running: `export GOOGLE_CLOUD_PROJECT=my-project`; use `.env` file with python-dotenv |
+| `google.auth.exceptions.DefaultCredentialsError` | Application Default Credentials not configured | Run `gcloud auth application-default login` or set `GOOGLE_APPLICATION_CREDENTIALS` |
+| Conflicting dependency versions | Multiple ADK-related packages with incompatible version pins | Create a clean venv: `python -m venv .venv && pip install -r requirements.txt` |
+
+## Orchestration Errors
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `SequentialAgent` skips sub-agents | Sub-agent returns empty response interpreted as completion | Ensure each sub-agent produces non-empty output; add explicit handoff messages |
+| `ParallelAgent` race condition | Multiple agents writing to the same state key | Use unique state keys per parallel branch; merge results in a post-processing step |
+| `LoopAgent` infinite loop | Exit condition never satisfied by agent output | Set `max_iterations` on LoopAgent; add explicit exit instruction in agent prompt |
+| Sub-agent not receiving context | Parent agent context not propagated to child | Pass `session_id` through the orchestrator; verify state sharing configuration |
+| Agent ordering wrong in pipeline | Sub-agents list order doesn't match intended sequence | Review `sub_agents=[...]` list; agents execute in list order for SequentialAgent |
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

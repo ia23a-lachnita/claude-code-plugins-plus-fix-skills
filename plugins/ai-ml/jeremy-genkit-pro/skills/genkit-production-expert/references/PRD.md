@@ -3,6 +3,8 @@
 **Version:** 2.1.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -25,6 +27,8 @@ Firebase Genkit applications require integrating multiple concerns — flow defi
 2. RAG flows return relevant documents with source citations on first implementation attempt
 3. Deployed flows have OpenTelemetry tracing and token usage monitoring configured out of the box
 4. Cold start time under 5 seconds for Firebase Functions deployments with appropriate memory allocation
+5. SAFETY_BLOCK errors handled gracefully with fallback response instead of crash
+6. Cost optimization applied: Flash model used by default, Pro only when explicitly needed
 
 ## Functional Requirements
 
@@ -40,10 +44,13 @@ Firebase Genkit applications require integrating multiple concerns — flow defi
 
 ## Non-Functional Requirements
 
-- All API keys stored in Secret Manager; never hardcoded in source
+- All API keys stored in Secret Manager; never hardcoded in source or environment variables
 - Schema validation must occur at runtime, not just compile time
 - Flows must handle `SAFETY_BLOCK` responses gracefully without crashing
 - Token usage must be tracked per-flow for cost attribution
+- Retry logic with exponential backoff for all model API calls
+- All flows must be testable locally via the Genkit Developer UI before deployment
+- Generated code must follow the conventions of the target language (TypeScript/Python/Go)
 
 ## Dependencies
 
@@ -59,3 +66,5 @@ Firebase Genkit applications require integrating multiple concerns — flow defi
 - Fine-tuning or training custom models
 - Non-Google model providers (OpenAI, Anthropic) — Genkit supports them but this skill focuses on Google AI
 - Frontend UI development for chat interfaces
+- Custom embedding model training (uses pre-built text-embedding-gecko)
+- Multi-tenant architecture with per-user flow isolation

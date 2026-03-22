@@ -3,6 +3,8 @@
 **Version:** 1.0.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -25,6 +27,8 @@ Deploying Vertex AI services (model endpoints, vector search indices, ML pipelin
 2. All deployed resources use CMEK encryption when KMS keys are provided
 3. Auto-scaling configured with appropriate min/max replicas for production traffic
 4. Monitoring dashboards track model latency, prediction count, and error rate
+5. Traffic splitting configured for canary deployments between model versions
+6. Vector search indices created with correct dimensions matching the embedding model
 
 ## Functional Requirements
 
@@ -43,6 +47,8 @@ Deploying Vertex AI services (model endpoints, vector search indices, ML pipelin
 - All CMEK key references must use full resource paths, not short names
 - Terraform code must pass `terraform fmt` and `terraform validate` without errors
 - Variable descriptions must document the expected format and valid ranges
+- Auto-scaling must include a scale-down delay to prevent thrashing during bursty traffic
+- All resources must be taggable with environment and owner labels for cost attribution
 
 ## Dependencies
 
@@ -59,3 +65,5 @@ Deploying Vertex AI services (model endpoints, vector search indices, ML pipelin
 - Application code that calls Vertex AI prediction endpoints
 - Agent Engine infrastructure (handled by adk-infra-expert)
 - CI/CD pipeline setup for Terraform operations
+- Custom container image building for model serving
+- Feature Store provisioning (future extension)

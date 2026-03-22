@@ -209,3 +209,6 @@ firebase emulators:start --export-on-exit=./emulator-data --import=./emulator-da
 ```
 
 Add `emulator-data/` to `.gitignore`.
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

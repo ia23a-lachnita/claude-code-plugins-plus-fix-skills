@@ -1,5 +1,7 @@
 # ARD: Genkit Infra Expert
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The Genkit Infra Expert generates Terraform modules for deploying Firebase Genkit applications to one of three production targets, with secrets management and observability.
@@ -65,3 +67,5 @@ GCP Production Infrastructure
 - Multi-region: deploy to multiple regions with Cloud Run services and load balancing
 - Cost tracking: add budget alerts based on token usage and compute costs
 - Pipeline integration: generate Cloud Build or GitHub Actions configs for Terraform plan/apply
+- Environment promotion: add workspace or directory-per-env pattern for dev/staging/prod
+- Drift detection: scheduled `terraform plan` to catch manual changes in Cloud Console

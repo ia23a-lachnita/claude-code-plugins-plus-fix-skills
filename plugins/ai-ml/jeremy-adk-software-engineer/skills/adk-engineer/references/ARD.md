@@ -1,5 +1,7 @@
 # ARD: ADK Engineer
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The ADK Engineer skill operates within a developer's local repository and optionally interacts with Google Cloud for deployment. It sits between the developer's requirements and production-ready ADK agent code, bridging the gap between intent and shippable implementation. The skill understands ADK's agent hierarchy (Agent, SequentialAgent, ParallelAgent, LoopAgent), tool system (FunctionTool wrappers), and deployment surface (local execution vs Vertex AI Agent Engine).
@@ -62,8 +64,11 @@ Production ADK Agent (local or Agent Engine)
 
 ## Extension Points
 
-- Custom tool functions: users add new `FunctionTool` wrappers following the structured return pattern
-- Orchestration patterns: swap SequentialAgent for ParallelAgent or LoopAgent by changing the pipeline definition
-- Model override: change the model string in AgentConfig to target different Gemini variants or third-party providers
-- Deployment targets: extend from local/Agent Engine to Cloud Run or GKE by adding deployment config generators
-- Test fixtures: add pytest fixtures for common agent/tool mocking patterns
+- Custom tool functions: users add new `FunctionTool` wrappers following the structured return pattern established in `tools.py`
+- Orchestration patterns: swap SequentialAgent for ParallelAgent or LoopAgent by changing the pipeline definition in `orchestrator.py`
+- Model override: change the model string in AgentConfig to target different Gemini variants (Flash, Pro, Ultra) or third-party providers
+- Deployment targets: extend from local/Agent Engine to Cloud Run or GKE by adding deployment config generators in `deploy/`
+- Test fixtures: add pytest fixtures in `conftest.py` for common agent/tool mocking patterns
+- Session management: integrate Memory Bank for stateful multi-turn conversations by adding session ID tracking
+- Observability: add OpenTelemetry tracing spans around tool calls for production debugging
+- Cost tracking: instrument token usage per agent call to enable cost attribution and budget alerts

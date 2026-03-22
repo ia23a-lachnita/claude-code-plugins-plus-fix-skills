@@ -3,6 +3,8 @@
 **Version:** 2.1.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -25,6 +27,8 @@ Vertex AI Agent Engine deployments involve seven interconnected configuration su
 2. Generate a weighted production-readiness score (0-100%) with per-category breakdowns
 3. Produce actionable recommendations with estimated score improvement per remediation item
 4. Complete a full inspection within 5 minutes for a standard deployment
+5. Security category catches 100% of missing VPC-SC, overprivileged IAM, and unencrypted configurations
+6. A2A compliance matrix clearly shows pass/fail for each protocol endpoint
 
 ## Functional Requirements
 
@@ -39,10 +43,13 @@ Vertex AI Agent Engine deployments involve seven interconnected configuration su
 
 ## Non-Functional Requirements
 
-- Read-only inspection: skill must not modify the inspected deployment
+- Read-only inspection: skill must not modify the inspected deployment or its configuration
 - All Agent Engine operations use the Python SDK, never gcloud CLI (no gcloud surface exists for Agent Engine)
-- Inspection must work from outside VPC-SC perimeters when access levels are configured
+- Inspection must work from outside VPC-SC perimeters when access levels are properly configured
 - Output format is YAML for machine-parseability and human readability
+- Scoring weights must reflect production impact: security and reliability weighted higher than monitoring
+- Inspection must handle partial failures gracefully (skip unavailable categories, still produce report)
+- Results must be deterministic: same deployment state always produces the same score
 
 ## Dependencies
 
@@ -54,7 +61,9 @@ Vertex AI Agent Engine deployments involve seven interconnected configuration su
 
 ## Out of Scope
 
-- Modifying or remediating Agent Engine configurations (inspection only)
+- Modifying or remediating Agent Engine configurations (inspection only, never writes)
 - Deploying new agents or updating existing deployments (handled by adk-deployment-specialist)
-- Infrastructure provisioning (handled by adk-infra-expert terraform skill)
+- Infrastructure provisioning with Terraform (handled by adk-infra-expert)
 - Cost optimization recommendations beyond basic model selection guidance
+- Load testing or performance benchmarking (inspection uses existing metrics only)
+- Cross-project inspection (each invocation targets a single project/agent pair)

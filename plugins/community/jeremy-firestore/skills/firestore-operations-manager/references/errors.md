@@ -80,3 +80,6 @@
 | `RESOURCE_EXHAUSTED` on free tier | Exceeded 50k reads/day or 20k writes/day (Spark plan) | Upgrade to Blaze plan; optimize query patterns; cache frequently read documents |
 | Reads cost more than expected | `get()` on a collection with 10,000 docs counts as 10,000 reads | Always use `.where()` and `.limit()` to narrow results; paginate large reads |
 | Deletes cost more than expected | Deleting a document with subcollections does not delete subcollections | Recursively delete subcollections first; use `firebase firestore:delete --recursive` for CLI deletion |
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

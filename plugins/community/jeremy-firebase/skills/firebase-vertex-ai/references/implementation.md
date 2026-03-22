@@ -214,3 +214,6 @@ const environment = defineString("ENVIRONMENT", { default: "dev" });
 ENVIRONMENT=staging
 VERTEX_REGION=us-central1
 ```
+
+---
+*[Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)*

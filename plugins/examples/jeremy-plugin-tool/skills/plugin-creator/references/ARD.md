@@ -1,5 +1,7 @@
 # ARD: Plugin Creator
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The Plugin Creator generates new plugin scaffolds within the claude-code-plugins monorepo, wiring them into the marketplace catalog and validation pipeline.
@@ -33,6 +35,8 @@ CI-Ready Plugin
 | Kebab-case enforcement | Reject names that aren't kebab-case | Repository convention; CI enforces it; catching early saves a cycle |
 | Default MIT license | MIT unless explicitly overridden | Most plugins in the marketplace use MIT; lowest friction for contributors |
 | Minimum 2 keywords | Required in plugin.json template | Marketplace search and discovery depend on keywords; enforced by CI |
+| Author defaults to repo owner | Use Jeremy Longshore when unspecified | Reduces friction for internal plugins; community contributors always specify |
+| Category validation | Check against allowed category list | Invalid categories cause marketplace sync failure; catch early |
 
 ## Tool Usage Pattern
 
@@ -59,3 +63,5 @@ CI-Ready Plugin
 - Interactive mode: prompt for each field interactively when minimal input is provided
 - Batch creation: generate multiple related plugins from a manifest file
 - Post-create hooks: run custom scripts after plugin creation (e.g., initialize git, create branch)
+- SaaS pack support: extend to create multi-skill packs with shared configuration
+- Migration tool: convert existing non-standard plugins into the validated structure

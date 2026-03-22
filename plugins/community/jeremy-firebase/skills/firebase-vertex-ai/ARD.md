@@ -1,5 +1,7 @@
 # ARD: Firebase Vertex AI Skill
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 This skill operates within the Firebase ecosystem on Google Cloud Platform. The primary integration points are:

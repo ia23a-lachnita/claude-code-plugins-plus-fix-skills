@@ -1,5 +1,7 @@
 # ARD: GCP Examples Expert
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The GCP Examples Expert maps developer requirements to the correct Google Cloud AI repository and generates production-ready code adapted from official patterns. It operates as a code generation skill that bridges six official GCP AI repositories.
@@ -35,6 +37,8 @@ Production-Ready Code Package
 | Source attribution | Cite the specific repo and pattern for every adaptation | Enables developers to find updates and deeper documentation; maintains trust |
 | Model selection guidance | Gemini 2.5 Flash for throughput, Pro for reasoning | Prevents cost surprises; Flash handles 80% of use cases at 10x lower cost |
 | Multi-target deployment | Generate configs for Cloud Run, Firebase Functions, and Agent Engine | Different deployment targets suit different flow types; developers choose |
+| Language adaptation | Transform patterns to TypeScript, Python, or Go | Each repo has language-specific conventions; adapt rather than translate literally |
+| IaC inclusion | Terraform templates alongside application code | Production deployments need reproducible infrastructure, not just application code |
 
 ## Tool Usage Pattern
 
@@ -64,3 +68,5 @@ Production-Ready Code Package
 - Custom security profiles: allow enterprise users to specify compliance frameworks (SOC2, HIPAA) for stricter defaults
 - Cost calculator integration: generate detailed cost projections based on expected query volume and model selection
 - Template versioning: pin examples to specific SDK versions with automated upgrade paths
+- Interactive selection: when multiple frameworks match, present a comparison table for the user to choose
+- Batch generation: create examples for multiple frameworks from a single requirements document

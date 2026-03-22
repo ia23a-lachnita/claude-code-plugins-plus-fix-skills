@@ -4,6 +4,8 @@
 **Author:** Jeremy Longshore
 **Date:** 2026-03-22
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 

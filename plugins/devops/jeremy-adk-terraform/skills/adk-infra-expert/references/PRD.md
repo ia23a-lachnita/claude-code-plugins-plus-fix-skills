@@ -3,6 +3,8 @@
 **Version:** 1.0.0
 **Author:** Jeremy Longshore <jeremy@intentsolutions.io>
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 
@@ -25,6 +27,8 @@ Provisioning production Vertex AI ADK infrastructure requires coordinating multi
 2. Agent Engine deployed with Code Execution Sandbox (14-day TTL, SECURE_ISOLATED) and Memory Bank enabled
 3. IAM bindings follow least-privilege: no `roles/owner` or `roles/editor`, only purpose-specific roles
 4. VPC Service Controls perimeter configured and enforced around AI resources
+5. Cloud Monitoring dashboards and alerting policies created for agent health metrics
+6. All resources pass `terraform validate` and `terraform fmt` checks
 
 ## Functional Requirements
 
@@ -39,10 +43,12 @@ Provisioning production Vertex AI ADK infrastructure requires coordinating multi
 
 ## Non-Functional Requirements
 
-- All modules must be idempotent and safe to re-apply
+- All modules must be idempotent and safe to re-apply without side effects
 - State stored remotely in GCS with locking via Cloud Storage
 - Terraform >= 1.0 and Google provider >= 5.0 required
 - No hardcoded project IDs, regions, or credentials in Terraform code
+- All variables must include descriptions documenting expected format and valid ranges
+- google-beta provider required for Agent Engine and VPC-SC resources
 
 ## Dependencies
 

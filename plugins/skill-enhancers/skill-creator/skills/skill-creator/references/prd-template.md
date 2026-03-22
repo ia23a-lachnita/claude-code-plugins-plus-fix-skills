@@ -10,6 +10,8 @@ Standard Product Requirements Document for all marketplace skills. Every PRD.md 
 **Version:** {version from SKILL.md frontmatter}
 **Author:** {author from SKILL.md frontmatter}
 **Status:** Active
+**Marketplace:** [tonsofskills.com](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io)
+**Portfolio:** [jeremylongshore.com](https://jeremylongshore.com)
 
 ---
 

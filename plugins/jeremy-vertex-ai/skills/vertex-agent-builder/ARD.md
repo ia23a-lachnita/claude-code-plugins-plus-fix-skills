@@ -1,5 +1,7 @@
 # ARD: Vertex AI Agent Builder
 
+> Part of [Tons of Skills](https://tonsofskills.com) by [Intent Solutions](https://intentsolutions.io) | [jeremylongshore.com](https://jeremylongshore.com)
+
 ## System Context
 
 The Vertex AI Agent Builder skill generates agent scaffolds that target Google Cloud's Vertex AI platform. The agent interacts with multiple GCP services depending on the use case.
