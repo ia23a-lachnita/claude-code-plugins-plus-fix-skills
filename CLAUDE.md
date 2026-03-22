@@ -118,12 +118,12 @@ Enforced by `scripts/check-performance.mjs` in CI:
 
 | Budget | Limit |
 |--------|-------|
-| Total bundle (gzipped) | 19.5 MB |
-| Largest file (gzipped) | 550 KB |
-| Build time | < 10s |
-| Route count | 1,600–2,000 |
+| Total bundle (gzipped) | 40 MB |
+| Largest file (gzipped) | 1 MB |
+| Build time | < 30s |
+| Route count | 2,800–4,000 |
 
-Largest pages: `explore/index.html` (~520KB), `skills/index.html` (~300KB), `compare/index.html` (~250KB). The `/downloads` directory is excluded from the budget.
+Largest pages: `explore/index.html` (~860KB), `skills/index.html` (~300KB), `compare/index.html` (~250KB). The `/downloads` directory is excluded from the budget. Budgets bumped 2026-03-22 after 63 SaaS pack merge (3,283 routes).
 
 ## Marketplace Design System
 

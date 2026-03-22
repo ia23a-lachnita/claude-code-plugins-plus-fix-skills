@@ -22,14 +22,14 @@ const DIST_DIR = path.join(REPO_ROOT, 'marketplace', 'dist');
 // Directories to exclude from performance analysis (binary downloads, not web assets)
 const EXCLUDE_DIRS = ['downloads'];
 
-// Performance budgets (calibrated for 350+ plugin marketplace, 2026-03)
+// Performance budgets (calibrated for 414+ plugin marketplace with 63 SaaS packs, 2026-03)
 const BUDGETS = {
-  totalSize: 19.5 * 1024 * 1024,  // 19.5MB gzipped (350+ plugin pages + substantive skill content + dark/light theme CSS + scroll reveals + explore/skills/compare)
-  largestFile: 550 * 1024,      // 550KB gzipped (explore page lists all plugins + keyword filter + install buttons)
-  buildTime: 10 * 1000,         // 10 seconds (ms)
+  totalSize: 40 * 1024 * 1024,  // 40MB gzipped (414 plugins + 63 SaaS packs + 2,788 skills + dark/light theme CSS)
+  largestFile: 1024 * 1024,     // 1MB gzipped (explore page lists all plugins + keyword filter + install buttons)
+  buildTime: 30 * 1000,         // 30 seconds (ms) — more pages = longer build
   routeCount: {
-    min: 1600,
-    max: 2000,  // 340+ plugins × multiple page types + core pages
+    min: 2800,
+    max: 4000,  // 414 plugins × multiple page types + core pages + SaaS pack pages
   },
 };
 
